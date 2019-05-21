@@ -190,6 +190,8 @@ class Config(object):  # pylint: disable=too-many-instance-attributes
     )
     SECTION_CORE_STORAGEPATH = "storagepath"
 
+    SECTION_CORE_OAUTH2_FLOW_RUNNER = "oauth2_flow_runner"
+
     SECTION_CORE_SCHEMA = {
         Optional(SECTION_CORE_LOGLEVEL): And(
             str, Use(str.lower), SECTION_CORE_LOGLEVEL_SCHEMA
@@ -204,6 +206,7 @@ class Config(object):  # pylint: disable=too-many-instance-attributes
         Optional(
             SECTION_CORE_CHECKSUM_JOBS, default=None
         ): SECTION_CORE_CHECKSUM_JOBS_SCHEMA,
+        Optional(SECTION_CORE_OAUTH2_FLOW_RUNNER): Choices("console", "local"),
         # backward compatibility
         Optional(SECTION_CORE_CLOUD, default=""): SECTION_CORE_CLOUD_SCHEMA,
         Optional(SECTION_CORE_STORAGEPATH, default=""): str,
@@ -240,6 +243,10 @@ class Config(object):  # pylint: disable=too-many-instance-attributes
         Optional(SECTION_GCP_PROJECTNAME): str,
     }
 
+    SECTION_GDRIVE_SCOPES = "scopes"
+    SECTION_GDRIVE_CREDENTIALPATH = SECTION_AWS_CREDENTIALPATH
+    SECTION_GDRIVE_OAUTH_ID = "oauth_id"
+
     # backward compatibility
     SECTION_LOCAL = "local"
     SECTION_LOCAL_STORAGEPATH = SECTION_AWS_STORAGEPATH
@@ -271,6 +278,8 @@ class Config(object):  # pylint: disable=too-many-instance-attributes
         Optional(SECTION_AWS_USE_SSL, default=True): BOOL_SCHEMA,
         Optional(SECTION_AWS_SSE): str,
         Optional(SECTION_GCP_PROJECTNAME): str,
+        Optional(SECTION_GDRIVE_SCOPES): str,
+        Optional(SECTION_GDRIVE_OAUTH_ID, default="default"): str,
         Optional(SECTION_CACHE_TYPE): SECTION_CACHE_TYPE_SCHEMA,
         Optional(SECTION_CACHE_PROTECTED, default=False): BOOL_SCHEMA,
         Optional(SECTION_REMOTE_USER): str,

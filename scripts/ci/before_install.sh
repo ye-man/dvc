@@ -45,6 +45,8 @@ ssh localhost ls &> /dev/null
 
 scriptdir="$(dirname $0)"
 
+python scripts/ci/decrypt_gdrive_oauth2.py
+
 echo > env.sh
 if [ -n "$TRAVIS_OS_NAME" ] && [ "$TRAVIS_OS_NAME" != "osx" ] \
    && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
